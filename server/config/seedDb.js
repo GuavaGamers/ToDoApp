@@ -3,7 +3,7 @@ const sequelize = require('./db')
 // const Note = require('../models/Note')
 
 //import my newly associated model
-const { Note, User, ToDo } = require('../models/index')
+const { Note, User, Todo } = require('../models/index')
 
 const userData = require('../seeds/user_data')
 const noteData = require('../seeds/note_data')
@@ -29,7 +29,7 @@ function seedDB(){
         })
 
         const toDoPromises = toDoData.map((todo) => {
-            return ToDo.create(todo)
+            return Todo.create(todo)
         })
 
         //resolve all the promises from userPromises + notePromises 
