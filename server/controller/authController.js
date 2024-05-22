@@ -17,4 +17,21 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { loginUser };
+const signUpUser = async (req, res) => {
+  try {
+    const newUserData = req.body;
+    // check if user exists already
+    const findUser = await User.findOne({
+      where: { email: newUserData.email },
+    });
+    if (findUser) res.status(500).send('user already exists...');
+
+    const user = await User.create(newUserData);
+
+    res.status(202).json(user);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+module.exports = { loginUser, signUpUser };
