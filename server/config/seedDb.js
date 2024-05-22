@@ -19,10 +19,10 @@ function seedDB() {
       //create the user and notes entries for our db
       //model.create() -> Promise -> const userPromises = [{promise Pending},{promise Pending},{promise Pending}]
       //iterate through our data -> User.create(user)
-      // const userPromises = userData.map((user) => {
-      //     //User.create(user)
-      //     return User.create(user)
-      // })
+      const userPromises = userData.map((user) => {
+        //User.create(user)
+        return User.create(user);
+      });
 
       const notePromises = noteData.map((note) => {
         return Note.create(note);
