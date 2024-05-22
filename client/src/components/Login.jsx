@@ -1,26 +1,23 @@
+// Login.js
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Login = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  //const [username, setUsername] = useState('')
-
+const Login = ({ handleLogin }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const body = {
       email,
-      password     
-    }
-
+      password
+    };
 
     try {
       const response = await axios.post('/api/login', body);
-      
       console.log('Login successful', response.data);
-      
+      handleLogin();
     } catch (error) {
       console.error('Login failed', error);
     }
@@ -48,7 +45,6 @@ const Login = () => {
             required
           />
         </div>
-        
         <button type="submit">Login</button>
       </form>
     </div>
@@ -56,3 +52,4 @@ const Login = () => {
 };
 
 export default Login;
+
