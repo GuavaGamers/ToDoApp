@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   //const [username, setUsername] = useState('')
 
 
@@ -36,7 +36,6 @@ const Login = () => {
           <label>Email:</label>
           <input
             type="email"
-            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -46,7 +45,6 @@ const Login = () => {
           <label>Password:</label>
           <input
             type="password"
-            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
