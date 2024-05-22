@@ -13,3 +13,5 @@ Router.get('/:noteId',getOneNote);
 Router.post('/',createNote)
 Router.delete('/:noteId',deleteNote)
 Router.patch('/:noteId',updateNote)
+
+module.exports = Router
