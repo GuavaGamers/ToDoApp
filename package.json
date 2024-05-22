@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "node server/app.js",
-    "seed": "node server/config/seedDb.js"
+    "seed": "node server/config/seedDb.js",
+    "dev-server": "nodemon server/app.js"
   },
   "author": "",
   "license": "ISC",
