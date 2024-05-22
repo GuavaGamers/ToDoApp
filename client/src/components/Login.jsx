@@ -1,23 +1,26 @@
 // Login.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Login = ({ handleLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const body = {
       email,
-      password
+      password,
     };
 
     try {
-      const response = await axios.post('/api/login', body);
+      const response = await axios.post('/api/auth/login', body);
       console.log('Login successful', response.data);
       handleLogin();
+      navigate('/');
     } catch (error) {
       console.error('Login failed', error);
     }
@@ -52,4 +55,3 @@ const Login = ({ handleLogin }) => {
 };
 
 export default Login;
-
