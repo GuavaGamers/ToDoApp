@@ -52,18 +52,13 @@ function App() {
         <Route
           path="/"
           element={
-            isLoggedIn ? <HomePage /> : <Login handleLogin={handleLogin} />
+            isLoggedIn ? <HomePage /> :  <AuthPage handleLogin={handleLogin} isLoggedIn={isLoggedIn} />
           }
         />
-        <Route
-          path="/auth"
-          element={
-            <AuthPage handleLogin={handleLogin} isLoggedIn={isLoggedIn} />
-          }
-        />
+        
         <Route path="/users" element={<User users={users} />} />
-        <Route path="/notes" element={<Notes />} />
-        <Route path="/todos" element={<Todo />} />
+        <Route path="/notes" element={<Notes loggedInUser={loggedInUser} />} />
+        <Route path="/todos" element={<Todo loggedInUser={loggedInUser} />} />
       </Routes>
       {!isLoggedIn && <Link to="/login">Login</Link>}
     </BrowserRouter>
