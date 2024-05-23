@@ -2,7 +2,7 @@
 import { BrowserRouter, Routes, Route, Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import Login from './components/Login';
+import Login from './components/auth/Login';
 import HomePage from './components/HomePage';
 import NavBar from './components/NavBar';
 import User from './components/User';
@@ -10,6 +10,7 @@ import Notes from './components/Notes';
 import Todo from './components/Todo';
 
 import './App.css';
+import AuthPage from './components/auth/AuthPage';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -23,7 +24,7 @@ function App() {
         setUsers(users);
       } catch (error) {
         console.error(error);
-        console.log("Could not get users :(");
+        console.log('Could not get users :(');
       }
     };
     getUsers();
@@ -41,8 +42,18 @@ function App() {
     <BrowserRouter>
       <NavBar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
       <Routes>
-        <Route path="/" element={isLoggedIn ? <HomePage /> : <Login handleLogin={handleLogin} />} />
-        <Route path="/login" element={<Login handleLogin={handleLogin} />} />
+        <Route
+          path="/"
+          element={
+            isLoggedIn ? <HomePage /> : <Login handleLogin={handleLogin} />
+          }
+        />
+        <Route
+          path="/auth"
+          element={
+            <AuthPage handleLogin={handleLogin} isLoggedIn={isLoggedIn} />
+          }
+        />
         <Route path="/users" element={<User users={users} />} />
         <Route path="/notes" element={<Notes />} />
         <Route path="/todos" element={<Todo />} />
