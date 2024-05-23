@@ -10,6 +10,7 @@ import Notes from './components/Notes';
 import Todo from './components/Todo';
 
 import './App.css';
+import SignUp from './components/SignUp';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -23,7 +24,7 @@ function App() {
         setUsers(users);
       } catch (error) {
         console.error(error);
-        console.log("Could not get users :(");
+        console.log('Could not get users :(');
       }
     };
     getUsers();
@@ -41,8 +42,14 @@ function App() {
     <BrowserRouter>
       <NavBar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
       <Routes>
-        <Route path="/" element={isLoggedIn ? <HomePage /> : <Login handleLogin={handleLogin} />} />
+        <Route
+          path="/"
+          element={
+            isLoggedIn ? <HomePage /> : <Login handleLogin={handleLogin} />
+          }
+        />
         <Route path="/login" element={<Login handleLogin={handleLogin} />} />
+        <Route path="/signup" element={<SignUp handleLogin={handleLogin} />} />
         <Route path="/users" element={<User users={users} />} />
         <Route path="/notes" element={<Notes />} />
         <Route path="/todos" element={<Todo />} />

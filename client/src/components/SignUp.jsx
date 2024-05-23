@@ -20,10 +20,11 @@ const SignUp = ({ handleLogin }) => {
     try {
       const response = await axios.post('/api/auth/signup', body);
       console.log('signup successful', response.data);
+      // login after sign up is successful
       handleLogin();
       navigate('/');
     } catch (error) {
-      console.error('Login failed', error);
+      console.error('signup failed', error);
     }
   };
 
