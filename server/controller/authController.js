@@ -1,9 +1,12 @@
-const { User } = require('../models');
+const { User, Todo, Note } = require('../models');
 
 const loginUser = async (req, res) => {
   try {
     const userData = req.body;
-    const findUser = await User.findOne({ where: { email: userData.email } });
+    const findUser = await User.findOne({
+      where: { email: userData.email },
+      include: [Todo, Note],
+    });
 
     if (!findUser) res.status(404).send('user does not exist...');
 
