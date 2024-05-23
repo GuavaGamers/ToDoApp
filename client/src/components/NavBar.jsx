@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './NavBar.css'; 
 
 function NavBar({ isLoggedIn, handleLogout, loggedInUser }) {
   return (
@@ -17,3 +18,4 @@ function NavBar({ isLoggedIn, handleLogout, loggedInUser }) {
 }
 
 export default NavBar;
+
