@@ -1,0 +1,39 @@
+
+
+nav {
+    background-color: #333; 
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    color: #fff; 
+    font-family: Arial, sans-serif;
+  }
+  
+  nav a {
+    color: #fff; 
+    text-decoration: none;
+    margin-right: 20px; 
+  }
+  
+  nav a:hover {
+    text-decoration: underline; 
+  }
+  
+  nav span {
+    margin-right: auto; 
+  }
+  
+  nav button {
+    background-color: #187fa4; 
+    color: #fff; 
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  nav button:hover {
+    background-color: #5faacc; 
+  }
+  
