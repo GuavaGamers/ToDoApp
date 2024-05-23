@@ -1,0 +1,32 @@
+.notes {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #c82e2e;
+}
+
+.notes h2 {
+    text-align: center;
+}
+
+.add-task {
+    display: block;
+    padding: 5px 10px;
+    background-color: black;
+    color: blue;
+    cursor: pointer;
+}
+
+.add-task:hover{
+    background-color: aliceblue;
+}
+
+.note-item{
+    display: flex;
+    background-color: #f9f9f9;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    transition: box-shadow 0.3s;
+}
