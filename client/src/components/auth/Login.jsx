@@ -19,7 +19,7 @@ const Login = ({ handleLogin }) => {
     try {
       const response = await axios.post('/api/auth/login', body);
       console.log('Login successful', response.data);
-      handleLogin();
+      handleLogin(response.data);
       navigate('/');
     } catch (error) {
       console.error('Login failed', error);

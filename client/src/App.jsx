@@ -15,6 +15,7 @@ import AuthPage from './components/auth/AuthPage';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [users, setUsers] = useState([]);
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -30,8 +31,10 @@ function App() {
     getUsers();
   }, []);
 
-  const handleLogin = () => {
+  const handleLogin = (user) => {
     setIsLoggedIn(true);
+    console.log('user passed into main app: ', user);
+    setLoggedInUser(user);
   };
 
   const handleLogout = () => {
@@ -40,7 +43,11 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+      <NavBar
+        isLoggedIn={isLoggedIn}
+        handleLogout={handleLogout}
+        loggedInUser={loggedInUser}
+      />
       <Routes>
         <Route
           path="/"
