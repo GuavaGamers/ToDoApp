@@ -1,52 +1,50 @@
 const sequelize = require('./db');
-// const User = require('../models/User')
-// const Note = require('../models/Note')
-
-//import my newly associated model
 const { Note, User, Todo } = require('../models/index');
-
 const userData = require('../seeds/user_data');
 const noteData = require('../seeds/note_data');
 const toDoData = require('../seeds/toDo_data');
-
-function seedDB() {
-  sequelize
-    .sync({ force: true })
-    .then(() => {
-      //indicate to our console that our db has been cleared and recreated
-      console.log('All tables were successfully dropped and recreated');
-
-      //create the user and notes entries for our db
-      //model.create() -> Promise -> const userPromises = [{promise Pending},{promise Pending},{promise Pending}]
-      //iterate through our data -> User.create(user)
-      const userPromises = userData.map((user) => {
-        //User.create(user)
-        return User.create(user);
-      });
-
-      const notePromises = noteData.map((note) => {
+async function seedDB() {
+  try {
+    await sequelize.sync({ force: true });
+    console.log('All tables were successfully dropped and recreated');
+    // Create users first
+    const createdUsers = await Promise.all(
+      userData.map((user) => User.create(user))
+    );
+    console.log('Users created successfully');
+    // Create notes with valid userId
+    const notePromises = noteData.map((note) => {
+      const user = createdUsers.find((u) => u.id === note.userId);
+      if (user) {
         return Note.create(note);
-      });
-
-      const toDoPromises = toDoData.map((todo) => {
-        return Todo.create(todo);
-      });
-
-      //resolve all the promises from userPromises + notePromises
-      return Promise.all([...userPromises, ...notePromises, ...toDoPromises]);
-    })
-    .then(() => {
-      console.log(
-        'All users, notes, and todos have been created and seeded successfully'
-      );
-    })
-    .catch((error) => {
-      console.error(
-        'Error syncing our models or problem with seeding our database',
-        error
-      );
+      } else {
+        console.error(`User with id ${note.userId} does not exist.`);
+        return null;
+      }
     });
+    await Promise.all(notePromises);
+    console.log('Notes created successfully');
+    // Create todos with valid userId
+    const toDoPromises = toDoData.map((todo) => {
+      const user = createdUsers.find((u) => u.id === todo.userId);
+      if (user) {
+        return Todo.create(todo);
+      } else {
+        console.error(`User with id ${todo.userId} does not exist.`);
+        return null;
+      }
+    });
+    await Promise.all(toDoPromises);
+    console.log('Todos created successfully');
+    console.log(
+      'All users, notes, and todos have been created and seeded successfully'
+    );
+  } catch (error) {
+    console.error(
+      'Error syncing our models or problem with seeding our database',
+      error
+    );
+  }
 }
-
-//invoke the function to seed information into
+// Invoke the function to seed information into the database
 seedDB();
