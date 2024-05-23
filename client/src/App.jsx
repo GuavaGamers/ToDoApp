@@ -11,6 +11,7 @@ import Todo from './components/Todo';
 
 import './App.css';
 import SignUp from './components/SignUp';
+import AuthPage from './components/AuthPage';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -48,8 +49,7 @@ function App() {
             isLoggedIn ? <HomePage /> : <Login handleLogin={handleLogin} />
           }
         />
-        <Route path="/login" element={<Login handleLogin={handleLogin} />} />
-        <Route path="/signup" element={<SignUp handleLogin={handleLogin} />} />
+        <Route path="/auth" element={<AuthPage handleLogin={handleLogin} />} />
         <Route path="/users" element={<User users={users} />} />
         <Route path="/notes" element={<Notes />} />
         <Route path="/todos" element={<Todo />} />
