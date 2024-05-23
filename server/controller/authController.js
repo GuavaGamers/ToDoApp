@@ -24,10 +24,10 @@ const signUpUser = async (req, res) => {
     const findUser = await User.findOne({
       where: { email: newUserData.email },
     });
+
     if (findUser) res.status(500).send('user already exists...');
 
     const user = await User.create(newUserData);
-
     res.status(202).json(user);
   } catch (error) {
     console.error(error);
