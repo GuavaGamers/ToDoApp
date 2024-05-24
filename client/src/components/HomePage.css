@@ -1,17 +1,26 @@
+
+:root {
+    --seasalt: #fcfafaff;
+    --silver: #c8d3d5ff;
+    --powder-blue: #a4b8c4ff;
+    --slate-gray: #6e8387ff;
+  }
+
+
 .homepage {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     font-family: Arial, sans-serif;
-  }
-  
-  .card {
-    width: 250px;
-    height: 200px;
+    background-color: rgb(54, 52, 52);
+}
+
+.homepage .card {
+    width: 300px;
+    height: 250px;
     background-color: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,17 +28,18 @@
     color: #333333;
     transition: transform 0.3s ease;
     margin: 0 20px;
-  }
-  
-  .card:hover {
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.homepage .card:hover {
     transform: translateY(-5px);
-  }
-  
-  .notes {
-    background-color: #ffd700;
-  }
-  
-  .todos {
+}
+
+.homepage .notes {
+    background-color: var(--silver);
+}
+
+.homepage .todos {
     background-color: #87ceeb;
-  }
-  
+}
