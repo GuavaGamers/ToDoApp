@@ -35,8 +35,9 @@ function App() {
     setIsLoggedIn(true);
     console.log('user passed into main app: ', user);
     setLoggedInUser(user);
-  };
 
+  };
+  console.log(loggedInUser)
   const handleLogout = () => {
     setIsLoggedIn(false);
   };
@@ -52,10 +53,10 @@ function App() {
         <Route
           path="/"
           element={
-            isLoggedIn ? <HomePage /> :  <AuthPage handleLogin={handleLogin} isLoggedIn={isLoggedIn} />
+            isLoggedIn ? <HomePage /> : <AuthPage handleLogin={handleLogin} isLoggedIn={isLoggedIn} />
           }
         />
-        
+
         <Route path="/users" element={<User users={users} />} />
         <Route path="/notes" element={<Notes loggedInUser={loggedInUser} />} />
         <Route path="/todos" element={<Todo loggedInUser={loggedInUser} />} />
