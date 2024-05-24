@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import '../Notes.css';
 
-export default function Notes() {
+const Notes = ({loggedInUser}) => {
+  console.log(loggedInUser)
   const [notes, setNotes] = useState([]);
   const [isAdding, setIsAdding] = useState(false);
   const [newNoteTitle, setNewNoteTitle] = useState('');
@@ -134,8 +135,8 @@ export default function Notes() {
         </div>
       )}
       <div className="notes-grid">
-        {notes.length > 0 ? (
-          notes.map(note => (
+        { loggedInUser ? (
+          loggedInUser.notes.map(note => (
             <div key={note.id} className='note-item'>
               <div className="note-content">
                 <h3>{note.title}</h3>
@@ -159,3 +160,5 @@ export default function Notes() {
     </div>
   );
 }
+
+export default Notes;
