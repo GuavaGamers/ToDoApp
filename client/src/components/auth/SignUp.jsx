@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './Auth.css';
 
 const SignUp = ({ handleLogin }) => {
   const [email, setEmail] = useState('');
@@ -29,24 +30,24 @@ const SignUp = ({ handleLogin }) => {
   };
 
   return (
-    <div className="signup">
+    <div className="login-signup-container">
       <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Email: </label>
+      <form className="form-container" onSubmit={handleSubmit}>
+        <label className="form-label">Email: </label>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        <label>Password: </label>
+        <label className="form-label">Password: </label>
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <label>Username: </label>
+        <label className="form-label">Username: </label>
         <input
           type="text"
           value={username}
