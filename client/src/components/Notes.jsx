@@ -9,7 +9,7 @@ const Notes = ({ loggedInUser }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [newNoteTitle, setNewNoteTitle] = useState('');
   const [newNoteContent, setNewNoteContent] = useState('');
-  const [isEditing, setIsEditing] = useState(null);
+  const [isEditing, setIsEditing] = useState(0);
   const [editNoteTitle, setEditNoteTitle] = useState('');
   const [editNoteContent, setEditNoteContent] = useState('');
 
@@ -70,21 +70,20 @@ const Notes = ({ loggedInUser }) => {
 
   const handleEditNote = async () => {
     try {
-      const response = await fetch(`/api/notes/${isEditing}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          title: editNoteTitle,
-          content: editNoteContent,
-        }),
-      });
-      const updatedNote = await response.json();
+      const body = {
+        title: editNoteTitle,
+        content: editNoteContent,
+      };
+
+      console.log('BODY::::', body);
+
+      const response = await axios.put(`/api/notes/${isEditing}`, body);
+      const updatedNote = response.data;
+      console.log('UPDATED NOTE:::', updatedNote);
       setNotes(
         notes.map((note) => (note.id === isEditing ? updatedNote : note))
       );
-      setIsEditing(null);
+      setIsEditing(0);
       setEditNoteTitle('');
       setEditNoteContent('');
     } catch (error) {
