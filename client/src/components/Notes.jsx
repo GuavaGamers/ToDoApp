@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import '../Notes.css';
+import axios from 'axios';
 
-const Notes = ({loggedInUser}) => {
-  console.log(loggedInUser)
-  const [notes, setNotes] = useState([]);
+const Notes = ({ loggedInUser }) => {
+  const [notes, setNotes] = useState(loggedInUser.notes);
+  console.log('NOTES:::', notes);
   const [isAdding, setIsAdding] = useState(false);
   const [newNoteTitle, setNewNoteTitle] = useState('');
   const [newNoteContent, setNewNoteContent] = useState('');
@@ -15,19 +16,17 @@ const Notes = ({loggedInUser}) => {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const response = await fetch('/api/notes');
-        if (!response.ok) {
-          throw new Error("Failed to fetch notes");
-        }
-        const data = await response.json();
-        setNotes(data);
+        const response = await axios.get(`/api/users/${loggedInUser.id}`);
+        console.log('RESPONSE USE EFFECT: ', response.data.notes);
+        setNotes(response.data.notes);
       } catch (error) {
-        console.error('There was an error fetching notes:', error);
+        console.error('Error fetching notes', error);
       }
     };
-
-    fetchNotes();
-  }, []);
+    if (loggedInUser) {
+      fetchNotes();
+    }
+  }, [loggedInUser]);
 
   const handleDelete = async (id) => {
     try {
@@ -39,33 +38,27 @@ const Notes = ({loggedInUser}) => {
       }
       setNotes(notes.filter((note) => note.id !== id));
     } catch (error) {
-      console.error("Could not delete note", error);
+      console.error('Could not delete note', error);
     }
   };
 
   const handleAddNote = async () => {
     try {
-      const response = await fetch('/api/notes', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ title: newNoteTitle, content: newNoteContent }),
-      });
+      const body = {
+        title: newNoteTitle,
+        content: newNoteContent,
+        userId: loggedInUser.id,
+      };
+      const response = await axios.post('/api/notes', body);
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Failed to add note', errorText);
-        throw new Error('Failed to add note: ' + errorText);
-      }
-
-      const newNote = await response.json();
+      const newNote = response.data;
+      console.log('NEW NOTE::', newNote);
       setNotes([...notes, newNote]);
       setNewNoteTitle('');
       setNewNoteContent('');
       setIsAdding(false);
     } catch (error) {
-      console.error("Could not add note", error);
+      console.error('Could not add note', error);
     }
   };
 
@@ -82,20 +75,25 @@ const Notes = ({loggedInUser}) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ title: editNoteTitle, content: editNoteContent }),
+        body: JSON.stringify({
+          title: editNoteTitle,
+          content: editNoteContent,
+        }),
       });
       const updatedNote = await response.json();
-      setNotes(notes.map(note => (note.id === isEditing ? updatedNote : note)));
+      setNotes(
+        notes.map((note) => (note.id === isEditing ? updatedNote : note))
+      );
       setIsEditing(null);
       setEditNoteTitle('');
       setEditNoteContent('');
     } catch (error) {
-      console.error("Could not edit note", error);
+      console.error('Could not edit note', error);
     }
   };
 
   return (
-    <div className='notes'>
+    <div className="notes">
       <h2>Notes</h2>
       <button className="add-task" onClick={() => setIsAdding(!isAdding)}>
         {isAdding ? 'Cancel' : 'Add Task'}
@@ -135,19 +133,27 @@ const Notes = ({loggedInUser}) => {
         </div>
       )}
       <div className="notes-grid">
-        { loggedInUser ? (
-          loggedInUser.notes.map(note => (
-            <div key={note.id} className='note-item'>
+        {notes.length > 0 ? (
+          notes.map((note) => (
+            <div key={note.id} className="note-item">
               <div className="note-content">
                 <h3>{note.title}</h3>
                 <p>{note.content}</p>
-                <p className="note-date">{new Date(note.createdAt).toLocaleString()}</p>
+                <p className="note-date">
+                  {new Date(note.createdAt).toLocaleString()}
+                </p>
               </div>
               <div className="note-actions">
-                <button className="edit-button" onClick={() => handleEditClick(note)}>
+                <button
+                  className="edit-button"
+                  onClick={() => handleEditClick(note)}
+                >
                   <FaEdit />
                 </button>
-                <button className="delete-button" onClick={() => handleDelete(note.id)}>
+                <button
+                  className="delete-button"
+                  onClick={() => handleDelete(note.id)}
+                >
                   <FaTrash />
                 </button>
               </div>
@@ -159,6 +165,6 @@ const Notes = ({loggedInUser}) => {
       </div>
     </div>
   );
-}
+};
 
 export default Notes;
