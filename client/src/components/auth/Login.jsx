@@ -50,7 +50,7 @@ const Login = ({ handleLogin }) => {
             <Input
               borderColor={colors.slateGray}
               focusBorderColor={colors.powderBlue}
-              color={colors.slateGray}
+              color={colors.raisin}
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -67,7 +67,7 @@ const Login = ({ handleLogin }) => {
             <Input
               borderColor={colors.slateGray}
               focusBorderColor={colors.powderBlue}
-              color={colors.slateGray}
+              color={colors.raisin}
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
