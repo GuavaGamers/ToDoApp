@@ -13,7 +13,7 @@ import './App.css';
 import AuthPage from './components/auth/AuthPage';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [users, setUsers] = useState([]);
   const [loggedInUser, setLoggedInUser] = useState(null);
 
