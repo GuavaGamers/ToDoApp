@@ -1,15 +1,7 @@
 // App.js
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link,
-  Navigate,
-  useNavigate,
-} from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import Login from './components/auth/Login';
 import HomePage from './components/HomePage';
 import NavBar from './components/NavBar';
 import User from './components/User';
@@ -52,17 +44,19 @@ function App() {
 
   return (
     <>
-      <NavBar
-        isLoggedIn={isLoggedIn}
-        handleLogout={handleLogout}
-        loggedInUser={loggedInUser}
-      />
       <Routes>
         <Route
           path="/"
           element={
             isLoggedIn ? (
-              <HomePage />
+              <>
+                <NavBar
+                  isLoggedIn={isLoggedIn}
+                  handleLogout={handleLogout}
+                  loggedInUser={loggedInUser}
+                />
+                <HomePage />
+              </>
             ) : (
               <AuthPage handleLogin={handleLogin} isLoggedIn={isLoggedIn} />
             )
