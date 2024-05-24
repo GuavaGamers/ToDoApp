@@ -1,12 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+
 /* .login-signup-container {
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: 100vh;
   justify-content: center;
-}
+} */
 
-.form-container {
+/* .form-container {
   display: flex;
   flex-direction: column;
 } */
+
+#main-container {
+  font-family: 'Source Sans 3', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
