@@ -9,10 +9,10 @@ const {
   updateNote,
 } = require('../controller/notesController');
 
-Router.get('/',getNotes);
-Router.get('/:noteId',getOneNote);
-Router.post('/',createNote)
-Router.delete('/:noteId',deleteNote)
-Router.patch('/:noteId',updateNote)
+Router.get('/', getNotes);
+Router.get('/:noteId', getOneNote);
+Router.post('/', createNote);
+Router.delete('/:noteId', deleteNote);
+Router.put('/:noteId', updateNote);
 
 module.exports = Router;

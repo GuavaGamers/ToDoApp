@@ -47,11 +47,13 @@ const createNote = async (req, res) => {
 const updateNote = async (req, res) => {
   try {
     const newInfo = req.body;
+    console.log('BODY IN SERVER ROUTE:::', newInfo);
     const noteId = req.params.noteId;
     const note = await Note.findByPk(noteId);
     if (note) {
       await note.update(newInfo);
-      res.status(200).send(`Note with ID ${noteId} has been updated`);
+      console.log('NOTE AFTER UPDATE::: ', note);
+      res.status(200).json(note);
     } else {
       res.status(404).json({ message: `Note with ID ${noteId} not found` });
     }
