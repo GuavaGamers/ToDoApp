@@ -15,6 +15,7 @@ import AuthPage from './components/auth/AuthPage';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [users, setUsers] = useState([]);
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   useEffect(() => {
     const getUsers = async () => {
@@ -30,8 +31,10 @@ function App() {
     getUsers();
   }, []);
 
-  const handleLogin = () => {
+  const handleLogin = (user) => {
     setIsLoggedIn(true);
+    console.log('user passed into main app: ', user);
+    setLoggedInUser(user);
   };
 
   const handleLogout = () => {
@@ -40,23 +43,22 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+      <NavBar
+        isLoggedIn={isLoggedIn}
+        handleLogout={handleLogout}
+        loggedInUser={loggedInUser}
+      />
       <Routes>
         <Route
           path="/"
           element={
-            isLoggedIn ? <HomePage /> : <Login handleLogin={handleLogin} />
+            isLoggedIn ? <HomePage /> :  <AuthPage handleLogin={handleLogin} isLoggedIn={isLoggedIn} />
           }
         />
-        <Route
-          path="/auth"
-          element={
-            <AuthPage handleLogin={handleLogin} isLoggedIn={isLoggedIn} />
-          }
-        />
+        
         <Route path="/users" element={<User users={users} />} />
-        <Route path="/notes" element={<Notes />} />
-        <Route path="/todos" element={<Todo />} />
+        <Route path="/notes" element={<Notes loggedInUser={loggedInUser} />} />
+        <Route path="/todos" element={<Todo loggedInUser={loggedInUser} />} />
       </Routes>
       {!isLoggedIn && <Link to="/login">Login</Link>}
     </BrowserRouter>

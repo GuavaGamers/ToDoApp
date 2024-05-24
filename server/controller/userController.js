@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Todo, Note } = require('../models');
 
 // Create a new user
 const createUser = async (req, res) => {
@@ -13,7 +13,7 @@ const createUser = async (req, res) => {
 // Get all users
 const getUsers = async (req, res) => {
   try {
-    const users = await User.findAll();
+    const users = await User.findAll({ include: [Todo, Note] });
     res.json(users);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -23,7 +23,7 @@ const getUsers = async (req, res) => {
 // Get single user by id
 const getUserById = async (req, res) => {
   try {
-    const user = await User.findByPk(req.params.id);
+    const user = await User.findByPk(req.params.id, { include: [Todo, Note] });
     if (user) {
       res.json(user);
     } else {

@@ -25,6 +25,14 @@ const Todo = sequelize.define('todos', {
     type: DataTypes.BOOLEAN,
     allowNull: false,
   },
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'Users',
+      key: 'id',
+    },
+  },
 });
 
 module.exports = Todo;

@@ -1,15 +1,21 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import './NavBar.css'; 
 
-
-export default function NavBar() {
-  
+function NavBar({ isLoggedIn, handleLogout, loggedInUser }) {
   return (
-    <nav className="navbar">
-      <NavLink to="/" className="nav-item" activeClassName="active" exact>
-        Home
-      </NavLink>
-    
+    <nav>
+      <Link to="/">Home</Link>
+
+      {isLoggedIn && loggedInUser && <span>Hello, {loggedInUser.username}! Ready to get things done?</span>} 
+      {isLoggedIn ? (
+        <button onClick={handleLogout}>Logout</button>
+      ) : (
+        <Link to="/auth">Login</Link>
+      )}
     </nav>
-  )
+  );
 }
+
+export default NavBar;
+

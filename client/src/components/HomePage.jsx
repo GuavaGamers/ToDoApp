@@ -1,15 +1,17 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './HomePage.css'; 
 
 function HomePage() {
   return (
-    <div>
-      <h1>To-Do App Homepage</h1>
-      <ul>
-        <li><Link to="/todos">To-Do List</Link></li>
-        <li><Link to="/notes">Notes</Link></li>
-      </ul>
+    <div className="homepage">
+      <Link to="/todos" className="card todos">
+        <h2>To Dos</h2>
+      </Link>
+      <Link to="/notes" className="card notes">
+        <h2>Notes</h2>
+      </Link>
     </div>
   );
 }
