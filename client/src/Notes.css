@@ -41,6 +41,7 @@
 .add-note-form textarea,
 .edit-note-form input,
 .edit-note-form textarea {
+  color: #000;
   width: 80%;
   padding: 10px;
   margin: 10px 0;

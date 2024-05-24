@@ -129,6 +129,7 @@ export default function Notes() {
             placeholder="Edit note content"
           />
           <button onClick={handleEditNote}>Save Changes</button>
+          <br></br>
           <button onClick={() => setIsEditing(null)}>Cancel</button>
         </div>
       )}
