@@ -7,10 +7,10 @@ function HomePage() {
   return (
     <div className="homepage">
       <Link to="/todos" className="card todos">
-        <h2>To Dos</h2>
+        <h2>TO-DOS</h2>
       </Link>
       <Link to="/notes" className="card notes">
-        <h2>Notes</h2>
+        <h2>NOTES</h2>
       </Link>
     </div>
   );
