@@ -13,6 +13,7 @@ import {
 import CommonHeader from './CommonHeader';
 import { colors } from './constants';
 import { EmailIcon, LockIcon } from '@chakra-ui/icons';
+import './Auth.css';
 
 const Login = ({ handleLogin }) => {
   const [email, setEmail] = useState('');

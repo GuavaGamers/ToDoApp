@@ -19,3 +19,17 @@
   align-items: center;
   height: 100vh;
 }
+
+/* Auth.css */
+#main-container {
+  background-color: rgb(54, 52, 52);
+}
+
+/* #auth-page-container {
+  background-color: rgb(54, 52, 52);
+} */
+
+.toggle-link {
+  color: white !important;
+}
+
