@@ -1,0 +1,39 @@
+/* Todo.css */
+
+
+:root {
+    --seasalt: #fcfafaff;
+    --silver: #c8d3d5ff;
+    --powder-blue: #a4b8c4ff;
+    --slate-gray: #6e8387ff;
+  }
+
+
+.todo-container {
+    background-color:white;
+  }
+  
+  .todo-button-blue {
+    background-color: #5faacc;
+    color: white;
+  }
+  
+  .todo-button-red {
+    background-color: rgb(189, 23, 23);
+    color: white;
+  }
+  
+  .todo-text {
+    color: rgb(55, 52, 52);
+  }
+
+  .todo-page{
+    background-color: rgb(54, 52, 52);
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+  

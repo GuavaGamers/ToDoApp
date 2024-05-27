@@ -1,40 +1,27 @@
-// import React from 'react';
-// import { Link } from 'react-router-dom';
-// import './NavBar.css'; 
 
-// function NavBar({ isLoggedIn, handleLogout, loggedInUser }) {
-//   return (
-//     <nav>
-//       <Link to="/">Home</Link>
-
-//       {isLoggedIn && loggedInUser && <span>Hello, <span style={{ color: 'red' }}>{loggedInUser.username}</span>! Ready to get things done?</span>} 
-//       {isLoggedIn ? (
-//         <button onClick={handleLogout}>Logout</button>
-//       ) : (
-//         <Link to="/auth">Login</Link>
-//       )}
-//     </nav>
-//   );
-// }
-
-// export default NavBar;
-
-
-import React from 'react';
 import { Link } from 'react-router-dom';
-import './NavBar.css'; 
+import './NavBar.css';
 
 function NavBar({ isLoggedIn, handleLogout, loggedInUser }) {
   return (
-    <nav>
-      <Link to="/" style={{ fontWeight: 'bold', color: "#5faacc", textDecoration: 'underline' }}>Home</Link>
-
-      {isLoggedIn && loggedInUser && <span>Hello, <span style={{ color: 'red' }}>{loggedInUser.username}</span> ! Ready to get things done?</span>} 
-      {isLoggedIn ? (
-        <button onClick={handleLogout}>Logout</button>
-      ) : (
-        <Link to="/auth">Login</Link>
-      )}
+    <nav className="navbar">
+      <div className="navbar-left">
+        <Link to="/" className="navbar-brand" style={{textDecoration: 'underline' }}>Home</Link>
+      </div>
+      <div className="navbar-center">
+        {isLoggedIn && loggedInUser && (
+          <span className="welcome-message">
+            Hello, <span className="username">{loggedInUser.username}</span>! Ready to get things done?
+          </span>
+        )}
+      </div>
+      <div className="navbar-right">
+        {isLoggedIn ? (
+          <button className="logout-button" onClick={handleLogout}>Logout</button>
+        ) : (
+          <Link to="/auth" className="login-link">Login</Link>
+        )}
+      </div>
     </nav>
   );
 }
