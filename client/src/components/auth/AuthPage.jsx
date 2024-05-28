@@ -24,7 +24,7 @@ const AuthPage = ({ handleLogin }) => {
               <Login handleLogin={handleLogin} />
               <Text mt={4}>
                 Need an account?{' '}
-                <Button variant="link" onClick={() => setLoginToggled(false)}>
+                <Button variant="link" onClick={() => setLoginToggled(false)} className="toggle-link">
                   Sign Up Here!
                 </Button>
               </Text>
@@ -34,7 +34,7 @@ const AuthPage = ({ handleLogin }) => {
               <SignUp handleLogin={handleLogin} />
               <Text mt={4}>
                 Already have an account?{' '}
-                <Button variant="link" onClick={() => setLoginToggled(true)}>
+                <Button variant="link" onClick={() => setLoginToggled(true)} className="toggle-link" >
                   Log in here!
                 </Button>
               </Text>

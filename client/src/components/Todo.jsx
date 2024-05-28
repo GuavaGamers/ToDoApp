@@ -12,6 +12,7 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
+import './Todo.css';
 
 const Todo = ({ loggedInUser }) => {
   const [todos, setTodos] = useState([]);
@@ -77,8 +78,9 @@ const Todo = ({ loggedInUser }) => {
   });
 
   return (
-    <Box maxW="600px" mx="auto" p={5} bg="gray.50" borderRadius="md" boxShadow="md">
-      <Text fontSize="2xl" mb={5}>Todo List</Text>
+    <div className="todo-page">
+    <Box className="todo-container" maxW="600px" mx="auto" p={5} bg="gray.50" borderRadius="md" boxShadow="md">
+      <Text className="todo-text" fontSize="2xl" mb={5}>To-Do List</Text>
       <Flex mb={5}>
         <Input
           value={newTodo}
@@ -97,7 +99,7 @@ const Todo = ({ loggedInUser }) => {
           <option value={2}>Medium</option>
           <option value={3}>Low</option>
         </Select>
-        <Button colorScheme="blue" onClick={handleAddTodo}>Add Task</Button>
+        <Button className="todo-button-blue" colorScheme="blue" style={{ width: '250px'}} onClick={handleAddTodo}>Add Task</Button>
       </Flex>
       <Flex mb={5}>
         <Select value={filter} onChange={handleFilterChange}>
@@ -131,17 +133,18 @@ const Todo = ({ loggedInUser }) => {
               </Text>
               <Stack direction="row" spacing={2}>
                 {editing === todo.id ? (
-                  <Button size="sm" onClick={() => handleSaveEdit(todo.id)}>Save</Button>
+                  <Button className="todo-button-blue" size="sm" onClick={() => handleSaveEdit(todo.id)}>Save</Button>
                 ) : (
-                  <Button size="sm" onClick={() => handleEditTodo(todo.id)}>Edit</Button>
+                  <Button className="todo-button-blue" size="sm" onClick={() => handleEditTodo(todo.id)}>Edit</Button>
                 )}
-                <Button size="sm" colorScheme="red" onClick={() => handleDeleteTodo(todo.id)}>Delete</Button>
+                <Button className="todo-button-red" size="sm" colorScheme="red" onClick={() => handleDeleteTodo(todo.id)}>Delete</Button>
               </Stack>
             </Flex>
           </ListItem>
         ))}
       </List>
     </Box>
+    </div>
   );
 };
 

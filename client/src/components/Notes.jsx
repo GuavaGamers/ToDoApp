@@ -9,7 +9,7 @@ const Notes = ({ loggedInUser }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [newNoteTitle, setNewNoteTitle] = useState('');
   const [newNoteContent, setNewNoteContent] = useState('');
-  const [isEditing, setIsEditing] = useState(0);
+  const [isEditing, setIsEditing] = useState(null);
   const [editNoteTitle, setEditNoteTitle] = useState('');
   const [editNoteContent, setEditNoteContent] = useState('');
 
@@ -83,7 +83,7 @@ const Notes = ({ loggedInUser }) => {
       setNotes(
         notes.map((note) => (note.id === isEditing ? updatedNote : note))
       );
-      setIsEditing(0);
+      setIsEditing(null);
       setEditNoteTitle('');
       setEditNoteContent('');
     } catch (error) {
